@@ -1,4 +1,4 @@
-# 🎵 RaisaVerse Music — MERN Stack Music Web Application
+# 🎵 RaiVerse Music — MERN Stack Music Web Application
 
 A production-ready music streaming web application built with **MongoDB, Express.js, React, and Node.js**. Features RBAC (Role-Based Access Control), audio compression, Base64 storage, and a premium glassmorphism dark UI.
 
