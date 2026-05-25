@@ -1,0 +1,241 @@
+/* Fonts moved to index.html to prevent PostCSS build crash */
+
+/* ============================================
+   Tailwind CSS v4
+   ============================================ */
+@import "tailwindcss";
+
+/* ============================================
+   Tailwind v4 Theme Configuration
+   Clean, Minimalist Dark Theme
+   ============================================ */
+@theme {
+  --color-bg-primary: #09090b; /* zinc-950 */
+  --color-bg-secondary: #18181b; /* zinc-900 */
+  --color-bg-tertiary: #27272a; /* zinc-800 */
+  --color-glass: rgba(24, 24, 27, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-hover: rgba(255, 255, 255, 0.04);
+  --color-accent-primary: #10b981; /* emerald-500 */
+  --color-accent-hover: #34d399; /* emerald-400 */
+  --color-accent-cyan: #06b6d4; /* cyan-500 */
+  --color-txt-primary: #fafafa; /* zinc-50 */
+  --color-txt-secondary: #a1a1aa; /* zinc-400 */
+  --color-txt-muted: #52525b; /* zinc-600 */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-txt-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-bg-tertiary); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-txt-muted); }
+
+/* ============================================
+   Custom Animations
+   ============================================ */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes barPulse {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes waveform {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Glassmorphism Utility (Subtle & Clean)
+   ============================================ */
+.glass {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-glass-border);
+}
+@supports (backdrop-filter: blur(12px)) {
+  .glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+.glass-hover {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.glass-hover:hover {
+  background-color: var(--color-glass-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   Custom Audio Player Styles
+   ============================================ */
+.player-progress-bar {
+  position: relative;
+  cursor: pointer;
+  height: 6px;
+  background-color: var(--color-bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.player-progress-fill {
+  height: 100%;
+  background-color: var(--color-accent-primary);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+/* Volume slider */
+input[type="range"].volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--color-bg-tertiary);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-txt-primary);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+input[type="range"].volume-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+input[type="range"].volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-txt-primary);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+input[type="range"].volume-slider:hover::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   Music Card Bars Animation
+   ============================================ */
+.bar-animate {
+  animation: barPulse 0.8s ease-in-out infinite;
+  background-color: var(--color-accent-primary);
+}
+
+.bar-animate.paused {
+  animation-play-state: paused;
+  background-color: var(--color-txt-muted);
+}
+
+/* ============================================
+   Waveform Loader
+   ============================================ */
+.waveform-bar {
+  animation: waveform 1s ease-in-out infinite;
+  background-color: var(--color-txt-primary);
+}
+
+/* ============================================
+   Upload Progress Shimmer
+   ============================================ */
+.progress-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.progress-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   Skeleton Loading
+   ============================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-tertiary) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    var(--color-bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+/* ============================================
+   Button Shimmer
+   ============================================ */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-shimmer:hover::before {
+  left: 100%;
+}
+
+/* ============================================
+   Select Styling
+   ============================================ */
+select option {
+  background: var(--color-bg-secondary);
+  color: var(--color-txt-primary);
+}
